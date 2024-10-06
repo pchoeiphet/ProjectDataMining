@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biology GPA Predictor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            /* Increased for better view */
+            width: 100%;
+            overflow: hidden;
+            /* Prevent overflow from container */
+        }
+
+        .header h1 {
+            text-align: center;
+            color: #2a9d8f;
+            font-weight: 500;
+        }
+
+        .scrollable-courses {
+            max-height: 250px;
+            /* Set a fixed height */
+            overflow-y: auto;
+            /* Enable vertical scrolling */
+            margin-bottom: 20px;
+            /* Space between courses and buttons */
+        }
+
+        .course {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .course label {
+            flex: 1.5;
+            padding-right: 5px;
+            color: #2a9d8f;
+            font-size: 12px;
+        }
+
+        .course input {
+            flex: 1;
+            padding: 8px;
+            margin-left: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        button {
+            background-color: #2a9d8f;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        button:hover {
+            background-color: #34b49b;
+        }
+
+        .calculate-btn {
+            display: block;
+            width: 100%;
+        }
+
+        .calculate-btn .leaf-icon {
+            margin-left: 5px;
+        }
+
+        #result {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9f7ef;
+            border-radius: 10px;
+        }
+
+        #result p {
+            font-size: 18px;
+            color: #264653;
+        }
+
+        .add-course-btn {
+            margin-bottom: 20px;
+            display: block;
+            width: 100%;
+        }
+
+        .note {
+            text-align: center;
+            font-size: 12px;
+            color: #264653;
+            margin-top: 20px;
+            /* Space above the note */
+            position: absolute;
+            bottom: 20px;
+            /* Position from the bottom */
+            left: 0;
+            right: 0;
+            /* Center note horizontally */
+        }
+
+        .course-codes {
+            list-style-type: none;
+            /* Remove bullets */
+            padding: 0;
+            /* Remove padding */
+            margin: 10px 0;
+            /* Space above and below */
+            font-size: 12px;
+            /* Smaller font size for codes */
+            text-align: center;
+            /* Center align the course codes */
+        }
+
+        input[type="text"] {
+            width: 48%;
+            padding: 8px;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #2a9d8f;
+        }
+
+        button {
+            width: 100%;
+            max-width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Biology GPA Predictor</h1>
+        </div>
+
+        <div class="scrollable-courses" id="fixed-courses">
+            <div class="course" id="course1">
+                <label for="course1">Course 1</label>
+                <input type="text" id="course-name1" placeholder="Enter course code">
+                <input type="text" id="grade1" placeholder="Grade (A-F)">
+            </div>
+            <div class="course" id="course2">
+                <label for="course2">Course 2</label>
+                <input type="text" id="course-name2" placeholder="Enter course code">
+                <input type="text" id="grade2" placeholder="Grade (A-F)">
+            </div>
+            <div class="course" id="course3">
+                <label for="course3">Course 3</label>
+                <input type="text" id="course-name3" placeholder="Enter course code">
+                <input type="text" id="grade3" placeholder="Grade (A-F)">
+            </div>
+            <div class="course" id="course4">
+                <label for="course4">Course 4</label>
+                <input type="text" id="course-name4" placeholder="Enter course code">
+                <input type="text" id="grade4" placeholder="Grade (A-F)">
+            </div>
+            <div class="course" id="course5">
+                <label for="course5">Course 5</label>
+                <input type="text" id="course-name5" placeholder="Enter course code">
+                <input type="text" id="grade5" placeholder="Grade (A-F)">
+            </div>
+            <div class="course" id="course6">
+                <label for="course6">Course 6</label>
+                <input type="text" id="course-name6" placeholder="Enter course code">
+                <input type="text" id="grade6" placeholder="Grade (A-F)">
+            </div>
+            <div class="course" id="course7">
+                <label for="course7">Course 7</label>
+                <input type="text" id="course-name7" placeholder="Enter course code">
+                <input type="text" id="grade7" placeholder="Grade (A-F)">
+            </div>
+            <div class="course" id="course8">
+                <label for="course8">Course 8</label>
+                <input type="text" id="course-name8" placeholder="Enter course code">
+                <input type="text" id="grade8" placeholder="Grade (A-F)">
+            </div>
+            <div id="additional-courses"></div> <!-- Moved here for better layout -->
+        </div>
+
+        <button class="add-course-btn" id="add-course" onclick="addCourse()">+ Add More Courses</button>
+
+        <button class="calculate-btn" onclick="calculateGPA()">
+            Calculate <span class="leaf-icon">🌿</span>
+        </button>
+
+        <div id="result">
+            <p>Your GPA: <span id="gpa-value">0.00</span></p>
+            <p>Performance: <span id="performance">-</span></p>
+        </div>
+    </div>
+
+    <p class="note">
+        Please enter the following course codes:
+        <strong>258122, 256121, 258132, 261103, 252113, 285212,
+            258252, 252114, 256254, 258343, 266201, 255111,
+            411221, 258202, 258344, 001211</strong>
+    </p>
+    </div>
+
+
+    <script>
+        let courseCount = 8; // Initial number of courses
+        const grades = ['A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F'];
+
+        function addCourse() {
+            courseCount++;
+            const additionalCourses = document.getElementById('additional-courses');
+            const courseDiv = document.createElement('div');
+            courseDiv.classList.add('course');
+            courseDiv.innerHTML = `
+                <label for="course${courseCount}">Course ${courseCount}</label>
+                <input type="text" id="course-name${courseCount}" placeholder="Enter course code">
+                <input type="text" id="grade${courseCount}" placeholder="Grade (A-F)">
+            `;
+            additionalCourses.appendChild(courseDiv);
+        }
+
+        function getPoints(grade) {
+            switch (grade) {
+                case 'A': return 4.0;
+                case 'B+': return 3.5;
+                case 'B': return 3.0;
+                case 'C+': return 2.5;
+                case 'C': return 2.0;
+                case 'D+': return 1.5;
+                case 'D': return 1.0;
+                case 'F': return 0.0;
+                default: return 0;
+            }
+        }
+
+        function calculateGPA() {
+            let totalPoints = 0;
+            let totalCourses = 0;
+
+            for (let i = 1; i <= courseCount; i++) {
+                const gradeInput = document.getElementById(`grade${i}`).value.toUpperCase();
+                if (!gradeInput || !grades.includes(gradeInput)) continue;
+
+                const points = getPoints(gradeInput);
+                totalCourses++;
+                totalPoints += points;
+            }
+
+            const gpa = totalPoints / totalCourses || 0;
+            document.getElementById('gpa-value').innerText = gpa.toFixed(2);
+
+            // Performance evaluation based on GPA ranges
+            let performance = '';
+            if (gpa >= 3.5) {
+                performance = 'Best';
+            } else if (gpa >= 3.0 && gpa < 3.5) {
+                performance = 'Good';
+            } else if (gpa >= 2.2 && gpa < 3.0) {
+                performance = 'Normal';
+            } else if (gpa >= 1.5 && gpa < 2.2) {
+                performance = 'Bad';
+            } else {
+                performance = 'Fail';
+            }
+
+            document.getElementById('performance').innerText = performance;
+
+            // Weka model prediction logic
+            let predictedGPA = 0;
+
+            // Implement the Weka model logic here based on your conditions.
+            if (gpa <= 3.25) {
+                predictedGPA = 0.0428 * parseFloat(document.getElementById('course1-grade1').value) +
+                    0.0094 * parseFloat(document.getElementById('course2-grade2').value) +
+                    0.0617 * parseFloat(document.getElementById('course3-grade3').value) +
+                    0.0558 * parseFloat(document.getElementById('course4-grade4').value) +
+                    0.0081 * parseFloat(document.getElementById('course5-grade5').value) +
+                    0.0637 * parseFloat(document.getElementById('course6-grade6').value) +
+                    0.0091 * parseFloat(document.getElementById('course7-grade7').value) +
+                    0.0552 * parseFloat(document.getElementById('course8-grade8').value) +
+                    0.0674 * parseFloat(document.getElementById('course9-grade9').value) +
+                    0.1201 * parseFloat(document.getElementById('course10-grade10').value) +
+                    0.0083 * parseFloat(document.getElementById('course11-grade11').value) +
+                    0.0071 * parseFloat(document.getElementById('course12-grade12').value) +
+                    0.0095 * parseFloat(document.getElementById('course13-grade13').value) +
+                    0.0127 * parseFloat(document.getElementById('course14-grade14').value) +
+                    0.0589 * parseFloat(document.getElementById('course15-grade15').value) +
+                    0.0654 * parseFloat(document.getElementById('course16-grade16').value) +
+                    0.8235; // + additional coefficients as needed
+            } else {
+                predictedGPA = 0.0698 * parseFloat(document.getElementById('course1-grade').value) +
+                    0.089 * parseFloat(document.getElementById('course2-grade').value) +
+                    0.1105 * parseFloat(document.getElementById('course3-grade').value) +
+                    0.141 * parseFloat(document.getElementById('course4-grade').value) +
+                    0.0774 * parseFloat(document.getElementById('course5-grade').value) +
+                    0.1189 * parseFloat(document.getElementById('course6-grade').value) +
+                    -0.0438 * parseFloat(document.getElementById('course7-grade').value) +
+                    0.1924 * parseFloat(document.getElementById('course8-grade').value) +
+                    0.2081 * parseFloat(document.getElementById('course9-grade').value) +
+                    -0.024; // Add intercept
+            }
+
+            document.getElementById('performance').innerText = predictedGPA.toFixed(2);
+        }
+    </script>
+
+</body>
+
+</html>
